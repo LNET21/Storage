@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Storage.Data;
+using Microsoft.Extensions.Logging;
 
 namespace Storage
 {
@@ -29,7 +30,8 @@ namespace Storage
 
             services.AddDbContext<StorageContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("StorageContext"))
-                    .EnableSensitiveDataLogging());
+                   // .EnableSensitiveDataLogging()
+                    .LogTo(Console.WriteLine, LogLevel.Information));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +58,7 @@ namespace Storage
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Products}/{action=Index}/{id?}");
             });
         }
     }

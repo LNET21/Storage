@@ -4,17 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Storage.Models.Entites;
+using Storage.Models.ViewModels;
 
 namespace Storage.Data
 {
     public class StorageContext : DbContext
     {
+        public DbSet<Product> Product { get; set; }
+
         public StorageContext(DbContextOptions<StorageContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Product> Product { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -75,5 +77,6 @@ namespace Storage.Data
                 );
 
         }
+
     }
 }
